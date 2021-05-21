@@ -1,4 +1,4 @@
-from app import db , User , Crime
+from app import db , User_n , Crime
 from werkzeug.security import generate_password_hash
 import json
 import random
@@ -46,21 +46,22 @@ list_locations = [{
 	"long":3.2892398865377124,
 	"text":"3rd Ave, Festac Town, Lagos",
 }]
+
 s_password_hashed = generate_password_hash('new_12345',method='sha256')
-new_user = User(name="new_user",email="new_user@g.com",password=s_password_hashed)
+new_user = User_n(name="new_user",email="new_user@g.com",password=s_password_hashed)
 db.session.add(new_user)
 db.session.commit()
 
 
 for _ in range(3):
 	n_user = fake.profile()
-	new_user = User(name=n_user["name"],email=n_user["mail"],password=s_password_hashed)
+	new_user = User_n(name=n_user["name"],email=n_user["mail"],password=s_password_hashed)
 	db.session.add(new_user)
 	db.session.commit()
 
 for x in range(60):
-	len_user = len(User.query.all())
-	user1 = User.query.get(random.randint(0,len_user-1) + 1)
+	len_user = len(User_n.query.all())
+	user1 = User_n.query.get(random.randint(0,len_user-1) + 1)
 	now = datetime.utcnow()
 	m_hours = random.randint(0,6)
 	i_date = now - timedelta(hours=m_hours)
@@ -75,6 +76,6 @@ for x in range(60):
 	db.session.commit()
 	print('Done ........')
 
-my_crime = Crime.query.get(1)
-print(my_crime.loc_lat)
-print(my_crime.loc_long)
+# my_crime = Crime.query.get(1)
+# print(my_crime.loc_lat)
+# print(my_crime.loc_long)

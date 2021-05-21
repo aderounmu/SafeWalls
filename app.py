@@ -46,7 +46,7 @@ class Crime(db.Model):
 	date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
 	sentiment_score = db.Column(db.Integer)
 	is_public = db.Column(db.Boolean)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	user_n_id = db.Column(db.Integer, db.ForeignKey('user_n.id'), nullable=False)
 
 	# def __init__(self,tweet_id,location,details,crime,date,sentiment_score,is_public):
 	# 	self.tweet_id = tweet_id
@@ -63,28 +63,38 @@ class Crime(db.Model):
 	def __repr__(self):
 		return '<id {}>'.format(self.id)
 
-class User(db.Model):
-	__tablename__ = 'user'
-
+class User_n(db.Model):
+	__tablename__ = 'user_n'
 	id = db.Column(db.Integer, primary_key = True)
 	name = db.Column(db.String(),nullable=False)
 	email = db.Column(db.String(),nullable=False, unique=True)
 	password = db.Column(db.String())
 	create_date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
 	crimes = db.relationship('Crime',backref='author',lazy=True)
+
+#user model
+# class User(db.Model):
+# 	__tablename__ = 'user'
+
+# 	id = db.Column(db.Integer, primary_key = True)
+# 	name = db.Column(db.String(),nullable=False)
+# 	email = db.Column(db.String(),nullable=False, unique=True)
+# 	password = db.Column(db.String())
+# 	create_date = db.Column(db.DateTime,nullable=False,default=datetime.utcnow())
+# 	crimes = db.relationship('Crime',backref='author',lazy=True)
 	
 	
 
-	def __init__(self, name, email, password):
-		self.name = name
-		self.email = email
-		self.password = password
+	# def __init__(self, name, email, password):
+	# 	self.name = name
+	# 	self.email = email
+	# 	self.password = password
 
-		pass
+	# def __repr__(self):
+	# 	return '<id {}>'.format(self.id)
 
-	def __repr__(self):
-		return '<id {}>'.format(self.id)
 
+#revoked token model
 class RevokedToken(db.Model):
 	__tablename__ = 'revoked_tokens'
 
@@ -113,13 +123,13 @@ def check_if_token_revoked(jwt_header,jwt_payload):
 	return RevokedToken.is_jti_blacklisted(jti)
 
 @jwt.user_identity_loader
-def user_identity_lookup(user):
-	return user.id
+def user_identity_lookup(user_n):
+	return user_n.id
 
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header,jwt_data):
 	identity = jwt_data["sub"]
-	return User.query.filter_by(id=identity).one_or_none()
+	return User_n.query.filter_by(id=identity).one_or_none()
 
 
 ##
@@ -163,20 +173,20 @@ def crime_store():
 	i_public = request.form.get("public")
 	i_public = False if i_public == "0" else True
 
-	location = json.load(i_location)
+	location = json.loads(i_location)
 
 	crime = Crime(tweet_id = i_tweet_id,location = i_location,loc_lat=location["lat"],loc_long=location["long"],loc_text=location["text"],details = i_details,crime = i_crime,date = i_date,sentiment_score = None,is_public = i_public,author = c_user)
 
 	db.session.add(crime)
 	db.session.commit()
 
-	return jsonify({"data":[{"id": x.id,"tweet_id": crime.tweet_id ,"location": json.loads(crime.location),"details": crime.details,"crime" : crime.crime,"date": crime.date, "sentiment_score": None,"is_public": crime.is_public,"author" :{ "id" :c_user.id , "email" : c_user.email}}] })
+	return jsonify({"data":[{"id": crime.id,"tweet_id": crime.tweet_id ,"location": json.loads(crime.location),"details": crime.details,"crime" : crime.crime,"date": crime.date, "sentiment_score": None,"is_public": crime.is_public,"author" :{ "id" :c_user.id , "email" : c_user.email}}] })
 
 @app.route('/api/crime/mycrimes/',methods=['GET'])
 @jwt_required()
 def my_crimes():
 	c_user = current_user
-	my_crimes = User.query.get(c_user.id).crimes
+	my_crimes = User_n.query.get(c_user.id).crimes
 	data = [{"tweet_id": x.tweet_id ,"location": json.loads(x.location),"details": x.details,"crime" : x.crime,"date": x.date, "sentiment_score": None,"is_public": x.is_public,"author" :{ "id" :x.author.id , "email" : x.author.email}} for x in my_crimes]
 	return jsonify({"data": data})
 
@@ -188,7 +198,7 @@ def login():
 	if not i_email or not i_password:
 		return 'field are required' , 400
 	
-	user = User.query.filter_by(email=i_email).first()
+	user = User_n.query.filter_by(email=i_email).first()
 	if check_password_hash(user.password,i_password):
 		access_token = create_access_token(identity=user)
 		details = {"user" : user.email , "access_token" : access_token }
@@ -207,14 +217,14 @@ def register():
 	if  not i_password or not i_name or not i_email:
 		return jsonify({'msg' : 'credentials missing'}), 400
 
-	user = User.query.filter_by(email=i_email).first()
+	user = User_n.query.filter_by(email=i_email).first()
 
 	if user : 
 		return jsonify({'msg' : 'user exist'}), 400
 
 	try:
 		password_hashed = generate_password_hash(i_password,method='sha256')
-		new_user = User(name=i_name,email= i_email,password=password_hashed)
+		new_user = User_n(name=i_name,email= i_email,password=password_hashed)
 		db.session.add(new_user)
 		db.session.commit()
 

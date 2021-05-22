@@ -4,6 +4,9 @@ import AuthPage from './pages/AuthPage.js'
 import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
 
+
+
+
 import {
   BrowserRouter as Router,
   Switch,

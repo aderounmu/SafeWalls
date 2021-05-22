@@ -579,17 +579,17 @@ class services:
 		analyzed_data = []
 		#array of analyzed id
 		checked = []
-		
+		i = 0
 
 		for x in pd_data:
-			
+			i  = i + 1
 			x_data = []
 			if x[0] not in checked:
 				for y in pd_data: 
 					if(y[0] not in checked and y[4] == x[4]):
 						point1 = (x[2]["lat"],x[2]["long"])
 						point2 = (y[2]["lat"],y[2]["long"])
-						value = self.check_radius(point1,point2,5)
+						value = self.check_radius(point1,point2,10)
 						if(value):
 							my_data = df_data[df_data.id == y[0]]
 							x_data.append(my_data.to_dict('records')[0])
@@ -600,10 +600,11 @@ class services:
 
 				checked.append(x[0])
 				analyzed_data.append({
+                    "data_id": i,
 					"count": len(x_data),
 					"center":{'lat':x[2]["lat"] , 'long':x[2]["long"], 'text': x[2]["text"]},
 					"crime": x[4],
-					"Radius": 5,
+					"Radius": 10,
 					"All_data":x_data
 				})
 

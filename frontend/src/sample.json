@@ -1,13 +1,13 @@
-//sample json 
+ 
 {
-"export current_user":{
+"current_user":{
 
 },
-"export current_user_store_data":{
+"current_user_store_data":{
 
 },
 
-"export feed_data" :{
+"feed_data" :{
   "count": 30, 
   "raw_data": [
     {

@@ -38,6 +38,13 @@ const App = () => {
                             </div>)
                         }
               <Field
+                id={'username'}
+                name={'username'}
+                label={'User Name'}
+                component={FormInput}
+                validator={userNameValidator}
+                        />
+              <Field
                 id={'email'}
                 name={'email'}
                 label={'Email'}
@@ -54,6 +61,7 @@ const App = () => {
                 optional={true}
                 component={PasswordValidator}
                         />
+                        
               <div className="k-form-buttons">
                 <Button
                   primary={true}

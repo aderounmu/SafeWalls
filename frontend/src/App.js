@@ -3,9 +3,9 @@ import './App.css';
 import AuthPage from './pages/AuthPage.js'
 import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
-
-
-
+import '@progress/kendo-theme-default/dist/all.css';
+import { Form, Field, FormElement } from '@progress/kendo-react-form';
+import { Button } from '@progress/kendo-react-buttons';
 
 import {
   BrowserRouter as Router,

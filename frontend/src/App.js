@@ -10,8 +10,12 @@ import { Button } from '@progress/kendo-react-buttons';
 =======
 import AddCrimeForm from './components/AddCrimeForm.js'
 
+<<<<<<< HEAD
 
 >>>>>>> 198c80f2dba886f856582332b39f2f775631fc2f
+=======
+//require('dotenv').config()
+>>>>>>> 059d6435aa530893c6f1ed1d1b4ab795bd9719ad
 
 import {
   BrowserRouter as Router,
@@ -20,7 +24,7 @@ import {
   Link
 } from "react-router-dom"
 
-function App() {
+function App() { 
   return (
     <Router>
       <div className="App">

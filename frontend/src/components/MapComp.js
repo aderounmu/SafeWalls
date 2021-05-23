@@ -52,8 +52,8 @@ export default function MapComp() {
                         let color_i = color_code.filter((value) => value.name == item.crime)
                         let color = color_i[0].color //color_i.length < 1 ? color_i[0].color : '#4F4CEF'
                        
-                        return <Overlay  anchor={[item.center.lat, item.center.long]} offset={[150, 150]}>
-                        <svg width={300} height={300} viewBox="0 0 184 200" fill={color} xmlns="http://www.w3.org/2000/svg">
+                        return <Overlay  anchor={[item.center.lat, item.center.long]} offset={[Math.pow(zoom,2.05)/2 , Math.pow(zoom,2.05)/2 ]}>
+                        <svg width={Math.pow(zoom,2.05)} height={Math.pow(zoom,2.05)} viewBox="0 0 184 200" fill={color} xmlns="http://www.w3.org/2000/svg">
                             <circle cx="84" cy="100" r="100"  fill-opacity="0.3"/>
                             <circle cx="84" cy="100" r="75"  fill-opacity="0.4"/>
                             <circle cx="84" cy="100" r="50"  fill-opacity="0.45"/>

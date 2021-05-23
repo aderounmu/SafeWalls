@@ -3,7 +3,7 @@ import './App.css';
 import AuthPage from './pages/AuthPage.js'
 import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
-
+import AddCrimeForm from './components/AddCrimeForm.js'
 
 
 
@@ -24,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/">
             <MapPage />
+          </Route>
+           <Route exact path="/test">
+            <AddCrimeForm />
           </Route>
           <Route exact path="*">
             <NoPage />

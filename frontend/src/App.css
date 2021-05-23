@@ -1,6 +1,15 @@
-@import '~@progress/kendo-theme-bootstrap/dist/all.css';
+/*@import '~@progress/kendo-theme-bootstrap/dist/all.css';*/
 @import '~bootstrap/dist/css/bootstrap.css';
 
 .make-tran{
   opacity: 0;
+}
+
+.sf-button-container{
+	position: absolute;
+    background: red;
+    padding: 25px;
+    font-size: 32px;
+    z-index: 1;
+    top: 80%;
 }

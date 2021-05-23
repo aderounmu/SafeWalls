@@ -5,7 +5,7 @@ import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
 import AddCrimeForm from './components/AddCrimeForm.js'
 
-
+//require('dotenv').config()
 
 import {
   BrowserRouter as Router,
@@ -14,7 +14,7 @@ import {
   Link
 } from "react-router-dom"
 
-function App() {
+function App() { 
   return (
     <Router>
       <div className="App">

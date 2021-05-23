@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 import { Button } from '@progress/kendo-react-buttons';
 import '@progress/kendo-theme-bootstrap/dist/all.css';
+import { Label, Error, Hint, FloatingLabel } from '@progress/kendo-react-labels';
 
 import {
     FormNumericTextBox, FormInput,
@@ -11,95 +12,68 @@ import {
     FormTextArea, FormRating
 } from './form-components';
 
+import SelectMapComp from './SelectMapComp.js'
+
 import {
     nameValidator, colorValidator,
     phoneValidator, addressValidator
 } from './validators'
 
 export default function AddCrimeForm(props) {
-    const handleSubmit = (dataItem) => alert(JSON.stringify(dataItem, null, 2));
+	const [crime, setCrime] = useState('')
+	const [myLocation,setMyLocation] = useState({})
+	const changeCrime = (value) =>{
+		setCrime(value)
+	}
+    const handleSubmit = (dataItem) =>{ 
+
+    	dataItem = {...dataItem , location : myLocation, crime : crime}
+    	alert(JSON.stringify(dataItem, null, 2));
+    }
     return (
         <div className="addFrom_container">
-            <div className="addCrimeForm shadow px-5 rounded">
+            <div className="addCrimeForm shadow p-5 rounded">
             	<div className="addCrime_content">
+            		<div>
+            			<SelectMapComp
+            				setLocation={setMyLocation}
+            			/>
+
+            		</div>
 					<Form
 				    onSubmit={handleSubmit}
 			        initialValues={{
-			            amount: 0
+			            
 			         }}
 				        render={(formRenderProps) => (
-				          <FormElement style={{ width: 400 }}>
+				          <FormElement  style={{ width: 400 }}>
+				            
 				            <Field
-				              id={'fullName'}
-				              name={'fullName'}
-				              label={'Full Name'}
-				              component={FormInput}
-				              validator={nameValidator}
-				                    />
-				            <Field
-				              id={'phoneNumber'}
-				              name={'phoneNumber'}
-				              label={'Phone Number'}
-				              hint={'Hint: Your active phone number.'}
-				              mask={'(999) 000-00-00-00'}
-				              component={FormMaskedTextBox}
-				              validator={phoneValidator}
-				                    />
-				            <Field
-				              id={'amount'}
-				              name={'amount'}
-				              label={'Amount'}
-				              hint={'Hint: Amount of money.'}
-				              format={'n2'}
-				              component={FormNumericTextBox}
-				                    />
-				            <Field
-				              id={'address'}
-				              name={'address'}
-				              label={'Address'}
-				              hint={'Hint: Enter your personal address.'}
+				            	className={"my-2"}
+				              id={'details'}
+				              name={'details'}
+				              label={'details'}
+				              hint={'Add details of your emergency if you can.'}
 				              component={FormTextArea}
 				              validator={addressValidator}
-				                    />
+				             />
+				            <div className="my-4">
+			                    	<Label className="my-2">Crime</Label>
+
+			                    <div className="row">
+			                    	<div className="col"><Button type={'button'} onClick={() => changeCrime('robbery')}>Robbery</Button></div>
+			                    	<div className="col"><Button type={'button'} onClick={() => changeCrime('kidnapping')}>Kidnapping</Button></div>
+			                    	<div className="col"><Button type={'button'}  onClick={() => changeCrime('roiting')}>Roiting</Button></div>
+			                    </div>
+			                    	<Hint className="my-2"> please select a crime currently happening</Hint>
+			                </div>
+
+		                    
 				            <Field
-				              id={'color'}
-				              name={'color'}
-				              label={'Choose Color'}
-				              component={FormColorPicker}
-				              validator={colorValidator}
-				                    />
-		                    <Field
-		                        id={'size'}
-		                        name={'size'}
-		                        label={'Size'}
-		                        hint={'Hint: Choose your size'}
-		                        min={1}
-		                        max={10}
-		                        component={FormSlider}
-		                        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-		                    />
-		                    <Field
-		                        id={'priceLimit'}
-		                        name={'priceLimit'}
-		                        label={'Price Limit'}
-		                        hint={'Hint: Choose a price range'}
-		                        step={1}
-		                        min={0}
-		                        max={100}
-		                        component={FormRangeSlider}
-		                        data={[0, 20, 30, 50, 70, 80, 100]}
-		                    />
-		                    <Field
-		                        id={'rating'}
-		                        name={'rating'}
-		                        label={'Rate you experience'}
-		                        component={FormRating}
-		                        optional={true}
-		                    />
-				            <Field
-				              id={'notifications'}
-				              name={'notifications'}
-				              label={'Allow notifications'}
+				            	className={"my-2"}
+				              id={'public'}
+				              name={'public'}
+				              label={'Should we make this public'}
 				              component={FormSwitch}
 				              optional={true}
 				            />

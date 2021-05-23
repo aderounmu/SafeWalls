@@ -27,7 +27,7 @@ export default function MapComp() {
 
     function place_location(position) {
         setCurrentLocation([position.coords.latitude, position.coords.longitude])
-        console.log([position.coords.latitude, position.coords.longitude])
+        
     }
 
     useEffect(() => {

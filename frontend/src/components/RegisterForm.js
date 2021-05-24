@@ -10,7 +10,7 @@ import {
     userNameValidator, emailValidator
 } from './validators'
 
-export default function LoginForm () {
+export default function RegisterForm () {
     const handleSubmit = (dataItem) => alert(JSON.stringify(dataItem, null, 2));
     return (
         <Form
@@ -18,17 +18,24 @@ export default function LoginForm () {
             render={(formRenderProps) => (
                 <FormElement style={{ width: 400 }}>
                     <Field
-                        id={"email"}
-                        name={"email"}
-                        label={"Email"}
-                        type={"email"}
+                        id={'username'}
+                        name={'username'}
+                        label={'User Name'}
+                        component={FormInput}
+                        validator={userNameValidator}
+                    />
+                    <Field
+                        id={'email'}
+                        name={'email'}
+                        label={'Email'}
+                        type={'email'}
                         component={FormInput}
                         validator={emailValidator}
                     />
                     <Field
                         id={'password'}
                         name={'password'}
-                        label={'Password'}
+                        label={'Passsord'}
                         type={'password'}
                         component={FormInput}
                         validator={emailValidator}

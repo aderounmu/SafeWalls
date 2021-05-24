@@ -2,16 +2,10 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
   "dependencies": {
     "@progress/kendo-data-query": "^1.5.5",
     "@progress/kendo-drawing": "^1.10.1",
     "@progress/kendo-licensing": "^1.1.4",
-<<<<<<< HEAD
-    "@progress/kendo-react-dateinputs": "^4.6.0",
-    "@progress/kendo-react-form": "^4.6.0",
-    "@progress/kendo-react-intl": "^4.6.0",
-=======
     "@progress/kendo-react-animation": "^4.6.0",
     "@progress/kendo-react-common": "^4.6.0",
     "@progress/kendo-react-data-tools": "^4.6.0",
@@ -23,15 +17,11 @@
     "@progress/kendo-react-labels": "^4.6.0",
     "@progress/kendo-react-treeview": "^4.6.0",
     "@progress/kendo-react-upload": "^4.6.0",
->>>>>>> 198c80f2dba886f856582332b39f2f775631fc2f
     "@progress/kendo-theme-bootstrap": "^4.35.1",
-    "@progress/kendo-theme-default": "^4.38.1",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.1",
-    "mobx": "^6.3.2",
-    "mobx-react": "^7.2.0",
     "pigeon-maps": "^0.19.5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",

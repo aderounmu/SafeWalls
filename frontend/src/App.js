@@ -3,19 +3,12 @@ import './App.css';
 import AuthPage from './pages/AuthPage.js'
 import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
-<<<<<<< HEAD
-import '@progress/kendo-theme-default/dist/all.css';
-import { Form, Field, FormElement } from '@progress/kendo-react-form';
-import { Button } from '@progress/kendo-react-buttons';
-=======
 import AddCrimeForm from './components/AddCrimeForm.js'
+import crimeFilter from './components/crimeFilter'
+import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
-<<<<<<< HEAD
-
->>>>>>> 198c80f2dba886f856582332b39f2f775631fc2f
-=======
 //require('dotenv').config()
->>>>>>> 059d6435aa530893c6f1ed1d1b4ab795bd9719ad
 
 import {
   BrowserRouter as Router,
@@ -36,7 +29,7 @@ function App() {
             <MapPage />
           </Route>
            <Route exact path="/test">
-            <AddCrimeForm />
+            <LoginForm />
           </Route>
           <Route exact path="*">
             <NoPage />

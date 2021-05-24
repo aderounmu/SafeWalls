@@ -56,7 +56,7 @@ export default function MapComp() {
                         </Overlay>
                     })
                 }{
-                   mydata.t_analyzed == null || mydata.t_analyzed.length == 0 ? ' ' : mydata.t_analyzed.map((item) => {    
+                   true ? ' ' : mydata.t_analyzed.map((item) => {    
                         return <Overlay anchor={[item.center.lat, item.center.long]} offset={[25, 30]}>
                             <div> I am the { item.crime}</div>
                         </Overlay>

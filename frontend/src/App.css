@@ -1,6 +1,13 @@
 @import '~@progress/kendo-theme-bootstrap/dist/all.css';
 @import '~bootstrap/dist/css/bootstrap.css';
 
+.color_Code{
+	position: absolute;
+	top:60px;
+	left: 10px;
+	z-index:10;
+}
+
 .sf-menu{
 	position: absolute;
     z-index: 15;

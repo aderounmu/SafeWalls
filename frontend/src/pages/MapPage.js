@@ -8,7 +8,11 @@ import AddCrimeForm from '../components/AddCrimeForm.js'
 import {useLocation , useLocationUpdate} from '../context/LocationContext.js'
 import {useCrimeData , useCrimeDataUpdate} from '../context/CrimeDataContext.js'
 
-
+let color_code = [
+    { name: 'robbery', color: '#4F4CEF' },
+    { name: 'kidnapping', color: '#EFD54C' },
+    { name: 'riot', color: '#EF4C4C' } 
+]
 
 
 export default function MapPage(){
@@ -61,6 +65,25 @@ export default function MapPage(){
 				<div className="row">
 					<div className={`col-12 col-md-9 ${ openSettings ? 'd-none d-sm-none d-md-block': ''}`}>
 						<div className="sf-map-container h-100">
+							<div className=" color_Code w-100">
+								<div className="row">
+									<div className="col-12 col-md-7 col-lg-6 m-2 p-2 shadow" style={{backgroundColor: 'white'}}>
+										<div className="row m-2">
+											{
+												color_code.map((item)=><div class="col">
+													<div className="row px-1">
+														<div className="col px-0">{item.name}</div>
+														<div className="col"><div className="rounded-circle px-0" style={{backgroundColor: item.color, height:'20px' , width: '20px'}}></div></div>
+													</div>
+
+												</div>
+
+												)
+											}
+										</div>
+									</div>
+								</div>
+							</div>
 							<MapComp/>
 						</div>
 					</div>

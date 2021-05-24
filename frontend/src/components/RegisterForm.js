@@ -8,7 +8,7 @@ import {
 } from './form-components';
 
 import {
-    userNameValidator, emailValidator
+    userNameValidator, emailValidator, passwordValidator
 } from './validators'
 
 import {useAuth , useAuthUpdate} from '../context/AuthContext.js'
@@ -99,7 +99,7 @@ export default function RegisterForm (props) {
                         label={'Passsord'}
                         type={'password'}
                         component={FormInput}
-                        validator={emailValidator}
+                        validator={passwordValidator}
                     />
                     <div className="k-form-buttons">
                         <Button

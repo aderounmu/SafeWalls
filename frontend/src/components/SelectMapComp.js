@@ -4,16 +4,7 @@ import {
     Input
 } from '@progress/kendo-react-inputs';
 import { Button } from '@progress/kendo-react-buttons';
-
 //get current user location
-import data from '../sample.js'
-
-let color_code = [
-    { name: 'robbery', color: '#4F4CEF' },
-    { name: 'kidnapping', color: '#EFD54C' },
-    { name: 'riot', color: '#EF4C4C' } 
-]
-
 
 export default function SelectMapComp(props) {
 
@@ -32,14 +23,13 @@ export default function SelectMapComp(props) {
         .then(data => {
             
             let data_i = data.data[0].
-           setPlainLocation(`${data_i.label}`) 
-           
-        }).then(()=>{
+            setPlainLocation(`${data_i.label}`) 
             props.setLocation({
                 lat: selectLocation[0],
                 long: selectLocation[1],
-                text: plainLocation
-            }) 
+                text: data_i.label
+            })
+           
         })
         .catch((err)=>console.log(err))
         
@@ -55,11 +45,10 @@ export default function SelectMapComp(props) {
 
             let data_i = data.data[0]
             console.log(data_i)
-           setSelectLocation([data_i.latitude,data_i.longitude]) 
-        }).then(()=>{
-            props.setLocation({
-                lat: selectLocation[0],
-                long: selectLocation[1],
+             setSelectLocation([data_i.latitude,data_i.longitude])
+             props.setLocation({
+                lat: data_i.latitude,
+                long: data_i.longitude,
                 text: plainLocation
             }) 
         })
@@ -68,53 +57,53 @@ export default function SelectMapComp(props) {
 
     return (
         <>
-            <div className={ `map-container h-100 w-100 ${ showMap ? 'd-none':'' }`}>
+            <div className={ `map-container h-100 w-100 my-4 ${ showMap ? 'd-none':'' }`}>
                 <Input value={plainLocation} onChange={(e) => setPlainLocation(e.value)}/>
 
-                <div className="row">
+                <div className="row my-2">
                     <div className="col">
-                        <Button type={'button'} onClick={() => changeLocation() }>Select this location</Button>
+                        <Button type={'button'} className={'btn-info'} onClick={() => changeLocation() }>Select this location</Button>
                     </div>
                     <div className="col">
-                        <Button type={'button'} onClick={() => setShowMap(true)}>Select From Map</Button>
+                       { props.removeMap ? '' :<Button type={'button'} onClick={() => setShowMap(true)}>Select From Map</Button>}
                     </div>
                 </div>
             </div>
-            <div className={ `map-container h-100 w-100 ${ showMap ? '': 'd-none'}`}>
-
-                <Map 
-                
-                height={500}
-                center={center} 
-                zoom={zoom} 
-                onBoundsChanged={({ center, zoom }) => { 
-                    setCenter(center) 
-                    setZoom(zoom)
-                    console.log(zoom)
-                }}>
-                    <div className="row">
-                    <div className="col">
-                        <Button type={'button'} onClick={() => changeLocation() }>Select this location</Button>
-                    </div>
-                    <div className="col">
-                        <Button type={'button'} onClick={() => setShowMap(false)}>Close</Button>
-                    </div>
-                </div>
-                    <ZoomControl />
-                    
-                        <Draggable  anchor={selectLocation} offset={[selectLocation[0]/2 , selectLocation[0]/2 ]} onDragEnd={setAnchor}>
-                            //change to user icon 
-                            <svg width={30} height={30} viewBox="0 0 184 200" fill={'#632789'} xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="84" cy="100" r="100"  fillOpacity="0.3"/>
-                                <circle cx="84" cy="100" r="75"  fillOpacity="0.4"/>
-                                <circle cx="84" cy="100" r="50"  fillOpacity="0.45"/>
-                                <circle cx="84" cy="100" r="25"  fillOpacity="0.5"/>
-                            </svg>    
-                         </Draggable>
-
-                    
-                </Map> 
-            </div>
+            {props.removeMap ? '' : <div className={ `map-container h-100 w-100 ${ showMap ? '': 'd-none'}`}>
+                           
+                            <Map 
+                            
+                            height={500}
+                            center={center} 
+                            zoom={zoom} 
+                            onBoundsChanged={({ center, zoom }) => { 
+                                setCenter(center) 
+                                setZoom(zoom)
+                                console.log(zoom)
+                            }}>
+                                <div className="row">
+                                <div className="col">
+                                    <Button type={'button'} onClick={() => changeLocation() }>Select this location</Button>
+                                </div>
+                                <div className="col">
+                                    <Button type={'button'} onClick={() => setShowMap(false)}>Close</Button>
+                                </div>
+                            </div>
+                                <ZoomControl />
+                                
+                                    <Draggable  anchor={selectLocation} offset={[selectLocation[0]/2 , selectLocation[0]/2 ]} onDragEnd={setAnchor}>
+                                        //change to user icon 
+                                        <svg width={30} height={30} viewBox="0 0 184 200" fill={'#632789'} xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="84" cy="100" r="100"  fillOpacity="0.3"/>
+                                            <circle cx="84" cy="100" r="75"  fillOpacity="0.4"/>
+                                            <circle cx="84" cy="100" r="50"  fillOpacity="0.45"/>
+                                            <circle cx="84" cy="100" r="25"  fillOpacity="0.5"/>
+                                        </svg>    
+                                     </Draggable>
+            
+                                
+                            </Map> 
+                        </div>}
         </>
     )
 }

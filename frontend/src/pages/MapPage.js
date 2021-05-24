@@ -21,8 +21,7 @@ export default function MapPage(){
     const newdata = useCrimeData()
     const setNewData = useCrimeDataUpdate()
 
-    useEffect(()=>{
-
+    const loadData = () =>{
     	fetch(`http://127.0.0.1:4500/api/crime/recent/${currentLocation[0]}/${currentLocation[1]}`)
     	.then(response => response.json())
     	.then(data => {
@@ -33,13 +32,19 @@ export default function MapPage(){
     	.catch(err =>{
     		console.log(err)
     	})
+    }
+
+    useEffect(()=>{
+
+    	loadData()
 
     },[currentLocation])
 	
 	return(
 		
 		<div className='map-page'>
-			<div className={`sf-menu ${ openSettings ? 'd-none d-sm-none d-md-block': ''}`}>
+			<div className={`sf-menu d-block d-sm-block d-md-none`}>
+				<Button className={`btn-${ openSettings ? 'danger': 'info'}`} icon={`${ openSettings ? 'close': 'menu'}`} onClick={() => setOpenSettings(!openSettings)}></Button>
 			</div>
 			<div className = {`sf-Main-section`}>
 				<div className="row">
@@ -49,7 +54,7 @@ export default function MapPage(){
 						</div>
 					</div>
 					<div className= {`col-12 pt-2 col-md-3 ${ openSettings ? '': 'd-none d-sm-none d-md-block'}`}>
-						<div className="sf-sidebar-container h-100">
+						<div className="sf-sidebar-container mt-4 mt-sm-2 h-100">
 							<SideBar/>
 						</div>
 					</div>
@@ -68,6 +73,7 @@ export default function MapPage(){
 						<div className="col-12 col-md-6 ">
 							<AddCrimeForm
 							setOpenAddFrom= {setOpenAddFrom}
+							loadData = {loadData}
 							 />
 							}
 						</div>

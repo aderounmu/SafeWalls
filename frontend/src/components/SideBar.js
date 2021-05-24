@@ -8,7 +8,7 @@ import {useCrimeData , useCrimeDataUpdate} from '../context/CrimeDataContext.js'
 
 export default function SideBar(){
 	const [openSettings, setOpenSettings ] = useState(false)
-	const [selectedTab, setSelectedTab] = React.useState(-1);
+	const [selectedTab, setSelectedTab] = React.useState(0);
 	let mydata = useCrimeData()
     const setMyData = useCrimeDataUpdate()
 
@@ -19,14 +19,15 @@ export default function SideBar(){
 		<div className=' w-100 sf-sideBar'>
 			<CrimeFilter />
 			<div className="pt-3">
-			<TabStrip selected={selectedTab} onSelect={handleSelectTab}>
+			<CrimeList data={mydata.raw_data} title={'Recent Crimes'}  />
+			{/*<TabStrip selected={selectedTab} onSelect={handleSelectTab}>
 				<TabStripTab title="List oF Crimes">
 					<CrimeList data={mydata.t_analyzed} title={'Recent Crimes'}  />
 				</TabStripTab>
 				<TabStripTab title="My Crimes">
 					<CrimeList data={mydata.raw_data} title={'My Uploaded Crime'} />
 				</TabStripTab>
-			</TabStrip>
+			</TabStrip>*/}
 			</div>
 		</div>
 	)

@@ -103,9 +103,9 @@ export default function CrimeFilter(props) {
             			 <div className="my-2">
 			                    <Label className="my-2">Crime</Label>
 			                    <div className="row">
-			                    	<div className="col"><Button className={'btn-danger'} type={'button'} onClick={() => changeCrime('robbery')}>Robbery</Button></div>
-			                    	<div className="col"><Button className={'btn-danger'} type={'button'} onClick={() => changeCrime('kidnapping')}>Kidnapping</Button></div>
-			                    	<div className="col"><Button className={'btn-danger'} type={'button'}  onClick={() => changeCrime('roit')}>Roiting</Button></div>
+			                    	<div className="col"><Button className={crime == 'robbery'? '': 'btn-danger'} type={'button'} onClick={() => changeCrime('robbery')}>Robbery</Button></div>
+			                    	<div className="col"><Button className={crime == 'kidnapping'? '': 'btn-danger'} type={'button'} onClick={() => changeCrime('kidnapping')}>Kidnapping</Button></div>
+			                    	<div className="col"><Button className={crime == 'roit'? '': 'btn-danger'} type={'button'}  onClick={() => changeCrime('riot')}>Roiting</Button></div>
 			                 		<div className="col"><Button className={'btn-info'} type={'button'}  onClick={() => changeCrime('')}>Reset</Button></div>	
 			                    </div>
 			                    	<Hint className="my-1"> please select a crime currently happening</Hint>

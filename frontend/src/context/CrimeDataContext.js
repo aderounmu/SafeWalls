@@ -21,7 +21,7 @@ export function CrimeDataProvider({children}){
 	function changeCrimeData(Crimes){
 		setCrimeData(Crimes)
 
-		//setCrimeData(data.feed_data)
+		setCrimeData(data.feed_data)
 	}
 
 	return(

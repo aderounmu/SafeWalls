@@ -12,9 +12,6 @@ import {FilterDataProvider} from './context/FilterDataContext.js'
 import {CrimeDataProvider} from './context/CrimeDataContext.js'
 
 
-import LoginForm from './components/LoginForm'
-import RegisterForm from './components/RegisterForm'
-
 //require('dotenv').config()
 
 import {

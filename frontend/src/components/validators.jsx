@@ -10,12 +10,14 @@ export const termsValidator = (value) => value ? "" : "It's required to agree wi
 export const emailValidator = (value) => !value ?
     "Email field is required." :
     (emailRegex.test(value) ? "" : "Email is not in a valid format.");
+
+ 
 export const nameValidator = (value) => !value ?
     "Full Name is required" :
-    value.length < 7 ? "Full Name should be at least 7 characters long." : "";
+    value.length < 10 ? "Full Name should be at least 7 characters long." : "";
 export const userNameValidator = (value) => !value ?
     "User Name is required" :
-    value.length < 5 ? "User name should be at least 5 characters long." : "";
+    value.length < 10 ? "User name should be at least 5 characters long." : "";
 export const phoneValidator = (value) => !value ?
     "Phone number is required." :
     phoneRegex.test(value) ? "" : "Not a valid phone number.";

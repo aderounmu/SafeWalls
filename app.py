@@ -192,6 +192,12 @@ def my_crimes():
 	data = [{"tweet_id": x.tweet_id ,"location": json.loads(x.location),"details": x.details,"crime" : x.crime,"date": x.date, "sentiment_score": None,"is_public": x.is_public,"author" :{ "id" :x.author.id , "email" : x.author.email}} for x in my_crimes]
 	return jsonify({"data": data})
 
+@app.route('/api/token/',methods=['GET'])
+@jwt_required()
+def my_check_token():
+	data = {'message': 'token still valid', 'isValid': True}
+	return jsonify({"data": data})
+
 @app.route('/api/login',methods=['POST'])
 def login():
 	i_password = request.form.get('password')
@@ -201,6 +207,10 @@ def login():
 		return 'field are required' , 400
 	
 	user = User_n.query.filter_by(email=i_email).first()
+
+	if not user:
+		return'User Doesnt exist' , 400 
+
 	if check_password_hash(user.password,i_password):
 		access_token = create_access_token(identity=user)
 		details = {"user" : user.email , "access_token" : access_token }

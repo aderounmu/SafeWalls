@@ -30,9 +30,9 @@ export default function MapComp() {
     
 
     return (
-        <div className='map-container h-100 w-100'>
+        <div className='map-container w-100'>
             <Map 
-            height={800}
+            className={'My_map'}
             center={currentLocation} 
             zoom={zoom} 
             onBoundsChanged={({ center, zoom }) => { 

@@ -34,7 +34,7 @@ export default function RegisterForm (props) {
          FormD.append('email',data.email)
          FormD.append('password',data.password)
          FormD.append('name',data.name)
-        fetch('http://127.0.0.1:4500/api/login',{
+        fetch('/api/login',{
             method: 'POST',
               body: FormD
         })
@@ -42,7 +42,7 @@ export default function RegisterForm (props) {
         .then( data => {
             localStorage.setItem('token', data.access_token)
             localStorage.setItem('logined',true)
-            
+
             console.log(data.access_token)
         })
         .then(token => {

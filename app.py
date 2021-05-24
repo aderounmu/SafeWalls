@@ -13,7 +13,7 @@ from geopy import distance
 from sqlalchemy import func
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='./frontend/build',static_url_path="/")
 #app.config.from_object(os.getenv("APP_SETTINGS","config.DevelopmentConfig"))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI']= os.getenv('DATABASE_URI')
@@ -137,9 +137,15 @@ def user_lookup_callback(_jwt_header,jwt_data):
 ##
 # APPLICATION ROUTES 
 ##
+
+
 @app.route('/')
 def index():
-	return 'HOME'
+	return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def page_not_found(error):
+	return app.send_static_file('index.html')
 
 @app.route('/api/crime/show/<crime_id>',methods=['GET'])
 def show(crime_id):
@@ -263,4 +269,4 @@ def logout():
 if __name__ == '__main__':
 	# db.drop_all()
 	# db.create_all()
-	app.run(debug=True,port=4500)
+	app.run(debug=False,port=4500)

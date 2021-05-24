@@ -45,7 +45,7 @@ export default function AddCrimeForm(props) {
          FormD.append('crime',data.crime)
          FormD.append('public',Number(data.public))
          console.log(FormD.get('public'))
-        fetch('http://127.0.0.1:4500/api/crime/add/',{
+        fetch('/api/crime/add/',{
         	headers:{
         		Authorization:`Bearer ${authData.token} `
         	},

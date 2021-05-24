@@ -22,7 +22,7 @@ export default function MapPage(){
     const setNewData = useCrimeDataUpdate()
 
     const loadData = () =>{
-    	fetch(`http://127.0.0.1:4500/api/crime/recent/${currentLocation[0]}/${currentLocation[1]}`)
+    	fetch(`/api/crime/recent/${currentLocation[0]}/${currentLocation[1]}`)
     	.then(response => response.json())
     	.then(data => {
     		console.log(data)
@@ -39,6 +39,17 @@ export default function MapPage(){
     	loadData()
 
     },[currentLocation])
+
+    //call the api every 3 minutes 
+
+    useEffect(()=>{
+    	let timer1 = setTimeout(()=>{
+    		loadData()
+    	},180000)
+    	return () =>{
+    		clearTimeout(timer1)
+    	}
+    },[])
 	
 	return(
 		

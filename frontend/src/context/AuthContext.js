@@ -28,7 +28,7 @@ export function AuthProvider({children}){
 		}
 		setAuth({...auth, is_logined: is_login, token: localStorage.getItem('token') })
 
-		 fetch('http://127.0.0.1:4500/api/token/',{
+		 fetch('/api/token/',{
         	headers:{
         		Authorization:`Bearer ${auth.token} `
         	},

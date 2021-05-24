@@ -33,7 +33,7 @@ export default function LoginForm (props) {
          let FormD = new FormData()
          FormD.append('email',data.email)
          FormD.append('password',data.password)
-        fetch('http://127.0.0.1:4500/api/login',{
+        fetch('/api/login',{
             method: 'POST',
               body: FormD
         })

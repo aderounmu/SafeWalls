@@ -32,11 +32,12 @@ export default function AddCrimeForm(props) {
     }
     return (
         <div className="addFrom_container">
-            <div className="addCrimeForm shadow p-5 rounded">
+            <div className="addCrimeForm shadow p-4 rounded">
             	<div className="addCrime_content">
             		<div>
             			<SelectMapComp
             				setLocation={setMyLocation}
+            				removeMap = {false}
             			/>
 
             		</div>
@@ -46,7 +47,7 @@ export default function AddCrimeForm(props) {
 			            
 			         }}
 				        render={(formRenderProps) => (
-				          <FormElement  style={{ width: 400 }}>
+				          <FormElement  style={{ width: '100%' }}>
 				            
 				            <Field
 				            	className={"my-2"}
@@ -61,7 +62,7 @@ export default function AddCrimeForm(props) {
 			                    	<Label className="my-2">Crime</Label>
 
 			                    <div className="row">
-			                    	<div className="col"><Button type={'button'} onClick={() => changeCrime('robbery')}>Robbery</Button></div>
+			                    	<div className="col"><Button type={'button'}  onClick={() => changeCrime('robbery')}>Robbery</Button></div>
 			                    	<div className="col"><Button type={'button'} onClick={() => changeCrime('kidnapping')}>Kidnapping</Button></div>
 			                    	<div className="col"><Button type={'button'}  onClick={() => changeCrime('roiting')}>Roiting</Button></div>
 			                    </div>
@@ -85,8 +86,8 @@ export default function AddCrimeForm(props) {
 				              >
 				                Submit
 				              </Button>
-				              <Button onClick={formRenderProps.onFormReset}>
-				                Clear
+				              <Button onClick={() => props.setOpenAddFrom(false)}>
+				                Close
 				              </Button>
 				            </div>
 				          </FormElement>

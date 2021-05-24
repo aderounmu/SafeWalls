@@ -1,8 +1,11 @@
 import React ,{useEffect, useState} from 'react'
 import { Map, Marker, Overlay, ZoomControl } from 'pigeon-maps'
+import {useLocation , useLocationUpdate} from '../context/LocationContext.js'
+import {useCrimeData , useCrimeDataUpdate} from '../context/CrimeDataContext.js'
+import {useFilterData , useFilterDataUpdate} from '../context/FilterDataContext.js'
 
 //get current user location
-import data from '../sample.js'
+
 
 let color_code = [
     { name: 'robbery', color: '#4F4CEF' },
@@ -13,42 +16,33 @@ let color_code = [
 
 export default function MapComp() {
 
-    const [currentLocation,setCurrentLocation] = useState([0,0])
-    const [center, setCenter] = useState([6.519, 3.376])
+    const currentLocation = useLocation()
+    const setCurrentLocation = useLocationUpdate()
+    //const [center, setCenter] = useState(currentLocation)//useState([6.519, 3.376])
     const [zoom, setZoom] = useState(11)
-    const [mydata, setMyData] = useState(data.feed_data)
+    let mydata = useCrimeData()
+    const setMyData = useCrimeDataUpdate()
 
-    //get
-    function get_current_location() {
-        if (navigator.geolocation) {
-           navigator.geolocation.getCurrentPosition(place_location) 
-        }
-    }
+    let myFilterData = useFilterData()
 
-    function place_location(position) {
-        setCurrentLocation([position.coords.latitude, position.coords.longitude])
-        
-    }
+    mydata =  myFilterData.t_analyzed == null || myFilterData.t_analyzed.length == 0 ? mydata : myFilterData
 
-    useEffect(() => {
-        get_current_location()
-        //setData(data.feed_data)   
-    }, [])
+    
 
     return (
         <div className='map-container h-100 w-100'>
             <Map 
-            height={1000}
-            center={center} 
+            height={800}
+            center={currentLocation} 
             zoom={zoom} 
             onBoundsChanged={({ center, zoom }) => { 
-                setCenter(center) 
+                setCurrentLocation(center) 
                 setZoom(zoom)
                 console.log(zoom)
             }}>
                 <ZoomControl />
                 {
-                    mydata.t_analyzed.map((item) => {
+                    mydata.t_analyzed == null || mydata.t_analyzed.length == 0 ? ' ' : mydata.t_analyzed.map((item) => {
                         let color_i = color_code.filter((value) => value.name == item.crime)
                         let color = color_i[0].color //color_i.length < 1 ? color_i[0].color : '#4F4CEF'
                        
@@ -62,7 +56,16 @@ export default function MapComp() {
                         </Overlay>
                     })
                 }{
-                    mydata.t_analyzed.map((item) => {
+                   mydata.t_analyzed == null || mydata.t_analyzed.length == 0 ? ' ' : mydata.t_analyzed.map((item) => {    
+                        return <Overlay anchor={[item.center.lat, item.center.long]} offset={[25, 30]}>
+                            <div> I am the { item.crime}</div>
+                        </Overlay>
+                    })
+                }
+
+
+                {
+                   mydata.t_analyzed == null || mydata.t_analyzed.length == 0 ? ' ' : mydata.t_analyzed.map((item) => {
                         return <Marker 
                             width={70}
                             anchor={[item.center.lat, item.center.long]} 
@@ -70,12 +73,6 @@ export default function MapComp() {
                             className='make-tran'
                         />
                     })       
-                }{
-                    mydata.t_analyzed.map((item) => {    
-                        return <Overlay anchor={[item.center.lat, item.center.long]} offset={[25, 30]}>
-                            <div> I am the { item.crime}</div>
-                        </Overlay>
-                    })
                 }
             </Map> 
         </div>

@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash , check_password_hash
 import os
 from dotenv import load_dotenv
 from controller import Controllers
+from flask_cors import CORS
 from datetime import datetime, timedelta
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager, get_jwt , current_user
 import json
@@ -23,6 +24,7 @@ jwt = JWTManager(app)
 
 Controllers(db)
 
+CORS(app)
 
 #from models import tweetModels
 

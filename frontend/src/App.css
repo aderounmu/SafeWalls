@@ -1,5 +1,7 @@
-/*@import '~@progress/kendo-theme-bootstrap/dist/all.css';*/
+@import '~@progress/kendo-theme-bootstrap/dist/all.css';
 @import '~bootstrap/dist/css/bootstrap.css';
+
+
 
 .make-tran{
   opacity: 0;
@@ -7,9 +9,84 @@
 
 .sf-button-container{
 	position: absolute;
-    background: red;
     padding: 25px;
     font-size: 32px;
     z-index: 1;
     top: 80%;
+}
+
+.add-from_container{
+	position: absolute;
+	left: 10px;
+	top:10px;
+	z-index: 20;
+	
+	
+}
+
+.addCrimeForm {
+	background-color: white;
+}
+
+.filter_content{
+	font-size: 11px !important;
+}
+
+.filter_content input , .addCrime_content input {
+	font-size: 0.7rem !important;
+	width: 100% !important;
+}
+.filter_content Label, .addCrime_content Label{
+	font-size: 1rem !important;
+}
+
+.filter_content Button, .addCrime_content Button {
+	font-size: 0.7rem !important;
+}
+
+.fliterForm{
+	background-color: #e4e4e4;
+}
+.map-page{
+	max-width: 98%;
+	height: 100%;
+	overflow:hidden;
+}
+.sf-sideBar{
+	
+	height: 100%;
+}
+
+
+@media (min-width: 768px){
+
+
+#root , body {
+	width: 100%;
+	height: 100%;
+	overflow:hidden;
+}
+
+.add-from_container{
+	left:0px;
+	top: 0px;
+	background-color:#adadada6;
+	width: 100%;
+	height:100%;
+}
+
+.sf-sideBar{
+	height: 50%;
+}
+.openFormButton{
+	font-size:2.15rem;
+}
+
+
+
+
+
+
+
+
 }

@@ -4,11 +4,17 @@ import AuthPage from './pages/AuthPage.js'
 import MapPage from './pages/MapPage.js'
 import NoPage from './pages/NoPage.js'
 import AddCrimeForm from './components/AddCrimeForm.js'
+
 import CrimeFilter from './components/CrimeFilter.js'
 import {AuthProvider} from './context/AuthContext.js'
 import {LocationProvider} from './context/LocationContext.js'
 import {FilterDataProvider} from './context/FilterDataContext.js'
 import {CrimeDataProvider} from './context/CrimeDataContext.js'
+
+
+import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
+
 //require('dotenv').config()
 
 import {
@@ -34,7 +40,9 @@ function App() {
             <MapPage />
           </Route>
            <Route exact path="/test">
+
             <CrimeFilter />
+
           </Route>
           <Route exact path="*">
             <NoPage />
